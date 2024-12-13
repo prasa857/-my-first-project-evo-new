@@ -8,13 +8,13 @@ export default function LoginForm(props) {
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
-    e.preventDefalt();
+    e.preventDefault();
     console.log("Form Data:", { email: email, password: password });
   };
 
   return (
     <div className="w-[380px] mx-auto bg-green-200">
-      <div className="bg-white shadow-md border border-gray-200 rounded-lg p-4">
+      <div className="bg-white shadow-md border border-gray-200 rounded-lg px-4">
         <form onSubmit={handleSubmit} className="space-y-6">
           {/*Title */}
           <h3 className="text-center text-xl font-semibold text-gray-900">
@@ -80,7 +80,7 @@ export default function LoginForm(props) {
             </div>
             <a
               href="/forget password"
-              className="text-sm text font-medium to-blue-700 hover:underline ml-auto"
+              className="text-sm text font-medium text-blue-700 hover:underline ml-auto"
             >
               Lost Password?
             </a>
