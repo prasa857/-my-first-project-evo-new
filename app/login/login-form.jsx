@@ -1,5 +1,6 @@
 "use client";
 
+import { loginUser } from "@/lib/apis/server";
 import { useState } from "react";
 
 //Client componentfor CSR
@@ -8,30 +9,34 @@ export default function LoginForm(props) {
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  
+
   const validateForm = () => {
     if (!email) {
       setEmailError("Email is required!!");
       return false;
-    }else{
+    } else {
       setEmailError("");
     }
 
     if (!password) {
       setPasswordError("Password is required!!");
       return false;
-    }else{
+    } else {
       setPasswordError("");
     }
     return true;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const  isValid = validateForm();
-    if(isValid){  
-    // Login Form Data Submitioin Area
-    console.log("Form Data:", { email: email, password: password });
+    const isValid = validateForm();
+
+    if (isValid) {
+      // Login Form Data Submitioin Area
+
+      const login = await loginUser({ email: email, password: password });
+
+      console.log("LOGIN RESPONSE", login);
     }
   };
 
@@ -61,9 +66,12 @@ export default function LoginForm(props) {
               onChange={(e) => setEmail(e.target.value)}
               className="bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:ring-blue-500 focus:border-red-500 block w-full p-2.5"
               placeholder="yourname@email.com"
-
             />
-            {emailError && <div className="text-red-700 text-xs mt-2 ml-1 ">{emailError}</div> }         
+            {emailError && (
+              <div className="text-red-700 text-xs mt-2 ml-1 ">
+                {emailError}
+              </div>
+            )}
           </div>
 
           {/*PassWord */}
@@ -84,9 +92,12 @@ export default function LoginForm(props) {
               className="bg-gray-50 border border-gray-300  rounded-lg text-gray-900 focus:ring-blue-500 focus:border-red-500 block w-full p-2.5"
               placeholder="********"
             />
-            {passwordError && <div className="text-red-700 text-xs mt-2 ml-1">{passwordError}</div>}          
+            {passwordError && (
+              <div className="text-red-700 text-xs mt-2 ml-1">
+                {passwordError}
+              </div>
+            )}
           </div>
-          
 
           {/*remember me */}
           <div className="flex items-start">
