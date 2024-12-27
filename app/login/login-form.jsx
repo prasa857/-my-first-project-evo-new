@@ -1,6 +1,6 @@
 "use client";
 
-import { loginUser } from "@/lib/apis/server";
+import { loginUser } from "@/app/libs/apis/server";
 import { useState } from "react";
 
 //Client componentfor CSR
