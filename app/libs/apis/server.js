@@ -17,14 +17,18 @@ export const getMovies = async () => {
   try {
     const response = await api.get("movies");
 
-    return response;
+    if (response.ok) {
+      return response.json();
+    } else {
+      return { error: true };
+    }
   } catch (error) {
     if (error) {
       // handle  http errors specifically
       const status = error?.response?.status; //HTTP status code (e.g.,404, 500)
       const responseBody = await error?.response?.json(); //press the respones body if possible
 
-      //console.log("HTTP Error:",status,responseBody);
+      console.log("HTTP Error:", status, responseBody, error);
     } else {
       //Handle non-http error(e.g.Network issue)
       console.log("Unknow error:", error);
