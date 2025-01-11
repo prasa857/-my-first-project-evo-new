@@ -3,7 +3,7 @@
 import { loginUser } from "@/app/libs/apis/server";
 import { useState } from "react";
 
-//Client componentfor CSR
+//Client component for CSR
 export default function LoginForm(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
