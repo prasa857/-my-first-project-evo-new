@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { FaStar } from "react-icons/fa";
 import {
   Card,
   CardContent,
@@ -7,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { getMovies } from "../libs/apis/server";
 
 export default async function DashboardPage() {
@@ -31,25 +33,56 @@ export default async function DashboardPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {moviesQuery?.length &&
             moviesQuery.map((movie) => (
-              <div key={movie._id} className="h-96 ">
+              <div key={movie._id} className="h-[480px] bg-green-600 ">
                 <Card className="h-full">
                   <CardHeader>
-                    <CardTitle>{movie?.title}</CardTitle>
-                    //<CardDescription className="sr-only">{movie?.title}</CardDescription>
+                    <CardTitle>
+                      {movie?.title}{" "}
+                      <span className="text-xs text-neutral-400">
+                        -{movie?.year ?? "N/A"}
+                      </span>
+                    </CardTitle>
+
+                    <CardDescription className="sr-only">
+                      {movie?.title}
+                    </CardDescription>
                   </CardHeader>
 
                   <CardContent>
-                    <div className="flex justify-center bg-black  w-full h-[276px] mb-4 rounded">
+                    <div className="flex justify-center bg-black  w-full h-[220px] mb-4 rounded">
                       <Image
                         src={movie?.poster} // Use movie poster Url
                         alt={movie?.title} // Use movie title for alt text
                         width={200} // Image width
                         height={400}
                         className="h-full w-auto object-contain"
+                        priority={true}
                       />
                     </div>
+                    <div className="flex flex-col justify-between h-[154px]">
+                      {/*movie plot */}
+                      <p className="line-clamp-3 text-xs">{movie?.plot}</p>
+                      {/*movie Genres*/}
+                      <div className="text-sm text-blue-900 font-semibold">
+                        {movie?.genres?.length && movie?.genres?.join("/  ")}
+                      </div>
+
+                      <div className="flex flex-row w-full justify-between">
+                        <Badge variant="success" className="font-medium">
+                          Rated : {movie.rated ?? "N/A"}
+                        </Badge>
+
+                        <div className="flex flex-row gap-2">
+                          <FaStar
+                            className="text-yellow-500  text-xl "
+                            title="IMD rating "
+                          />
+                          {movie?.imdb?.rating ?? 0}
+                        </div>
+                      </div>
+                    </div>
                   </CardContent>
-                  <CardFooter className="flex justify-between"></CardFooter>
+                  <CardFooter className="flex justify-between "></CardFooter>
                 </Card>
               </div>
             ))}
