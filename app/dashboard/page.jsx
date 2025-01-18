@@ -67,12 +67,12 @@ export default async function DashboardPage() {
                         {movie?.genres?.length && movie?.genres?.join("/  ")}
                       </div>
 
-                      <div>
+                      <div className="flex flex-row w-full justify-between">
                         <Badge variant="success" className="font-medium">
                           Rated : {movie.rated ?? "N/A"}
                         </Badge>
 
-                        <div>
+                        <div className="flex flex-row gap-2">
                           <FaStar
                             className="text-yellow-500  text-xl "
                             title="IMD rating "
