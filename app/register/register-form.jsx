@@ -1,6 +1,7 @@
 "use client";
 //keep this as the client component  (funtional component)
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import {
   Card,
   CardContent,
@@ -25,12 +26,34 @@ export default function RegisterForm() {
             {" "}
             <div className="flex flex-col space y-1.5 ">
               <div className="flex flex-col space-1.5 ">
+                <Label htmlFor="name">Name</Label>
+                <Input id="name" name="name " placeholder="john Doe" />
+              </div>
+              <div className="flex flex-col space-1.5 ">
                 <Label htmlFor="email">Email</Label>
                 <Input id="email" name="email" placeholder="john@example.com" />
               </div>
               <div className="flex flex-col space-1.5 ">
-                <Label htmlFor="name">Name</Label>
-                <Input id="name" name="name " placeholder="john Doe" />
+                <Label htmlFor="password">Password</Label>
+                <Input
+                  id="password"
+                  name="password"
+                  placeholder="Enter Password"
+                />
+              </div>
+              <div className="flex flex-col space-1.5 ">
+                <Label htmlFor="comfirm password">Comfirm Password</Label>
+                <Input
+                  id="comfirm password"
+                  name="comfirm password"
+                  placeholder="Enter comfirm password"
+                />
+              </div>
+              <div className="flex justify-center gap-2 text-xm">
+                Already as anaccont?
+                <Link href="/login" className="text-blue-600 hover:underline">
+                  Login
+                </Link>
               </div>
             </div>
           </CardContent>
