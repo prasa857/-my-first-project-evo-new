@@ -14,6 +14,11 @@ import { Label } from "@radix-ui/react-label";
 import { Input } from "@/components/ui/input";
 
 export default function RegisterForm() {
+  const handleSubmitForm = async (event) => {
+    event.priventDefault();
+
+    console.log("Submitted");
+  };
   return (
     <div className="flex justify-center items-center min-h-screen">
       <Card className="bg-blue-50/90  w-[350px]">
@@ -21,7 +26,7 @@ export default function RegisterForm() {
           <CardTitle>Create an account</CardTitle>
           <CardDescription>Enter Your Information To Get Start</CardDescription>
         </CardHeader>
-        <form>
+        <form onSubmit={handleSubmitForm}>
           <CardContent>
             {" "}
             <div className="flex flex-col space y-1.5 ">
