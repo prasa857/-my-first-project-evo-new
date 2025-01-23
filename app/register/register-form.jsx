@@ -10,12 +10,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Label } from "@radix-ui/react-label";
+import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 
 export default function RegisterForm() {
   const handleSubmitForm = async (event) => {
-    event.priventDefault();
+    event.preventDefault();
 
     console.log("Submitted");
   };
