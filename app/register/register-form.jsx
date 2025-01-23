@@ -15,10 +15,11 @@ import { Input } from "@/components/ui/input";
 
 export default function RegisterForm() {
   const handleSubmitForm = async (event) => {
-    event.priventDefault();
+    event.preventDefault();
 
     console.log("Submitted");
   };
+
   return (
     <div className="flex justify-center items-center min-h-screen">
       <Card className="bg-blue-50/90  w-[350px]">
