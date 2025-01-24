@@ -13,10 +13,16 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 
+<<<<<<< HEAD
 const DEFAULT_ERROR = {
   error: false,
   message: "",
 };
+=======
+export default function RegisterForm() {
+  const handleSubmitForm = async (event) => {
+    event.preventDefault();
+>>>>>>> dev
 
 export default function RegisterForm() {
   const [error, setError] = useState(DEFAULT_ERROR);
