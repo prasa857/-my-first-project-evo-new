@@ -1,4 +1,4 @@
-import clientPromise from "@/app/libs/mongodb";
+import clientPromise from "@/lib/mongodb";
 import { NextResponse } from "next/server";
 
 /*const MOVIES = [
@@ -31,7 +31,9 @@ export const GET = async (req) => {
     //console.log("MFLIX MOVIES::", movies);
   } catch (error) {
     console.log("MONGODB ERROR", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
   }
-
-  return NextResponse.json({ success: true, movies: MOVIES });
 };
