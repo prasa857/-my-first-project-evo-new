@@ -14,6 +14,8 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 // import { registerUser } from "@/lib/apis/server";
 
+import { signUp } from "@/lib/auth-client";
+
 const DEFAULT_ERROR = {
   error: false,
   message: "",
@@ -32,14 +34,37 @@ export default function RegisterForm() {
 
     //Basic FrontEnd Validation Logic
 
-    if (name && email && password && confirmPassword) {
-      if (password === confirmPassword) {
-        setError(DEFAULT_ERROR);
-        // await registerUser({ name, email, password });
-      } else {
-        setError({ error: true, message: "Passwords don't match" });
+    // if (name && email && password && confirmPassword) {
+    if (password === confirmPassword) {
+      setError(DEFAULT_ERROR);
+      // await registerUser({ name, email, password });
+
+      const { data, error } = await signUp.email(
+        {
+          email: email,
+          passwrod: password,
+          name: name,
+          image: undefined,
+        },
+        {
+          onRequest: () => {
+            // console.log("onRequest",ctx);
+          },
+          onSuccess: (ctx) => {
+            console.log("onSuccess", ctx);
+          },
+          onError: (error) => {
+            console.log("onError", error);
+          },
+        }
+      );
+      if (data) {
+        console.log("data", data);
       }
+    } else {
+      setError({ error: true, message: "Passwords don't match" });
     }
+    //}
   };
 
   return (
