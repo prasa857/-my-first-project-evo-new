@@ -78,6 +78,7 @@ export default function RegisterForm() {
             console.log("onSuccess", ctx);
           },
           onError: (ctx) => {
+            console.log("onError", ctx);
             if (ctx) {
               setError({ error: true, message: ctx.error.message });
             }
