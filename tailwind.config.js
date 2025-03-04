@@ -9,8 +9,14 @@ module.exports = {
   theme: {
     container: {
       center: true,
-	  padding:"15px",
-	  
+      padding: "15px",
+    },
+    screen: {
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1536",
     },
     extend: {
       colors: {
