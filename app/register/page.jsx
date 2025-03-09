@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import RegisterForm from "./register-form";
-import { redirect } from "next/dist/server/api-utils";
+import { redirect } from "next/navigation";
 
 //keep this as a sever component(funtional component)
 export default async function RegisterPage() {

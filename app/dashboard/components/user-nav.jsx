@@ -1,23 +1,33 @@
 "use client";
-import { Logout, Settings, User } from "lucide-react";
-
+import { redirect } from "next/navigation";
+import { LogOut, Settings, User } from "lucide-react";
+import { signOut, useSession } from "@/lib/auth-client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useSession } from "@/lib/auth-client";
 
 export default function UserNav() {
   const { data: session } = useSession();
 
   console.log(session);
 
+  const handleLogout = async () => {
+    await signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          redirect("/login");
+        },
+      },
+    });
+  };
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -40,10 +50,24 @@ export default function UserNav() {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Profile</DropdownMenuItem>
-        <DropdownMenuItem>Billing</DropdownMenuItem>
-        <DropdownMenuItem>Team</DropdownMenuItem>
-        <DropdownMenuItem>Subscription</DropdownMenuItem>
+
+        <DropdownMenuGroup>
+          <DropdownMenuItem>
+            <User className="mr-2 h-4 w-4 text-primary-400" />
+            <span>Profile</span>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <User className="mr-2 h-4 w-4 text-primary-400" />
+            <span>Setting</span>
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
+
+        <DropdownMenuSeparator />
+
+        <DropdownMenuItem onClick={handleLogout}>
+          <User className="mr-2 h-4 w-4 text-primary-400" />
+          <span>Logout</span>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
