@@ -11,11 +11,20 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { getMovies } from "@/lib/apis/server";
 
+// import { auth } from "@/lib/auth";
+// import { headers } from "next/headers";
+
 export default async function DashboardPage() {
   // 1. Add shadcn card
   // 2. Create movie Get EndPoint
   // 3. Read the dummy response
   // 4. Reader data set in  the UI
+
+  // const session = await auth.api.getSession({
+  //   headers: await headers(),
+  // });
+
+  // console.log("SESSION", session);
 
   const moviesQuery = await getMovies();
   console.log("MOVIES from front end ::", moviesQuery);
