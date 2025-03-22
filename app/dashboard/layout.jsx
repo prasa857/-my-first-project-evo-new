@@ -1,11 +1,12 @@
 import UserNav from "./components/user-nav";
+import SidePanel from "./components/side-panel";
 
 export default function DashboardLayout({ children }) {
   return (
     <div className="flex max-h-screen overflow-hidden bg-gray-100">
       {/*Side Panel*/}
       <aside className="w-64 overflow-y-auto border-r bg-white ">
-        Side Panel
+        <SidePanel />
       </aside>
       <div className="bg-white-500 flex flex-1 flex-col">
         {/*Dashboard Heder*/}
