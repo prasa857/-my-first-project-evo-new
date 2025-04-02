@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react"; // Make sure to import useState
 import {
   Card,
   CardContent,
@@ -13,8 +14,19 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { MultiSelect } from "@/components/multi-select";
+import { GENRES } from "@/lib/constants";
 
 export default function AddMovieForm() {
+  // Initialize genres state
+  const [genres, setGenres] = useState([]);
+
+  // Map GENRES to the format expected by MultiSelect
+  const genresList = GENRES.map((genre) => ({
+    label: genre,
+    value: genre,
+  }));
+
   return (
     <Card className="max-w-2xl max-auto">
       <CardHeader>
@@ -25,7 +37,7 @@ export default function AddMovieForm() {
         <CardContent className="space-y-4">
           <div>
             <Label htmlFor="title">Movie Title</Label>
-            <input
+            <Input
               id="title"
               name="title"
               placeholder="Enter the Movie title"
@@ -34,7 +46,7 @@ export default function AddMovieForm() {
 
           <div>
             <Label htmlFor="year">Movie Year</Label>
-            <input
+            <Input
               id="year"
               name="year"
               type="number"
@@ -43,11 +55,21 @@ export default function AddMovieForm() {
           </div>
 
           <div>
-            <Label htmlForm="plot">Movie plot</Label>
+            <Label htmlFor="plot">Movie plot</Label>
             <Textarea
               id="plot"
               name="plot"
               placeholder="Enter the Movie plot"
+            />
+          </div>
+
+          <div>
+            <Label htmlFor="genres">Movie Genres</Label>
+            <MultiSelect
+              list={genresList}
+              placeholder="Select movie genres"
+              selectedItems={genres}
+              onValueChange={setGenres}
             />
           </div>
         </CardContent>
