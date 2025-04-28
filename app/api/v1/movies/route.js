@@ -1,4 +1,4 @@
-import clientPromise from "@/app/libs/mongodb";
+import { db } from "@/lib/mongodb";
 import { NextResponse } from "next/server";
 
 /*const MOVIES = [
@@ -14,11 +14,6 @@ import { NextResponse } from "next/server";
 export const GET = async (req) => {
   //Get movies from the MongoDB
   try {
-    const client = await clientPromise();
-
-    //smaple_mflix is the database name
-    const db = client.db("sample_mflix");
-
     //fetch movie from the database
     const movies = await db
       .collection("movies")
@@ -31,7 +26,9 @@ export const GET = async (req) => {
     //console.log("MFLIX MOVIES::", movies);
   } catch (error) {
     console.log("MONGODB ERROR", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
   }
-
-  return NextResponse.json({ success: true, movies: MOVIES });
 };
